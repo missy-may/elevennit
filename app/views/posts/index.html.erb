@@ -1,0 +1,9 @@
+<ul>
+	<% @posts.each do |post| %>
+		<li>
+			<div class="title"><%= link_to post.title,  post.link %></div>
+			<div class="tagline">submitted <%= time_ago_in_words post.created_at %> ago</div>
+		</li>
+	<% end %>
+
+</ul>
