@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: [:show, :edit, :update]
+  before_action :find_post, only: [:show, :edit, :update, :destroy]
 
 
   def index
@@ -10,6 +10,14 @@ class PostsController < ApplicationController
   end
 
   def edit
+  end
+
+  def destroy
+    if @post.destroy
+      redirect_to posts_path, flash: { notice: 'Your post has been removed.' }
+    else
+      redirect_to posts_path, flash: { notice: 'We were unable to remove that post.' }
+    end
   end
 
   def new
