@@ -22,22 +22,19 @@
         <main>
 
           <!-- BEGIN flash messages -->
-          <% flash.each do |name, msg| %>
-            <% if msg.is_a? Array %>
-
-              <%= content_tag :div, class: name do %>
+          <% flash.each do |name, msg| -%>
+            <% if msg.is_a? Array -%>
+              <div class="alert <%= flash_class name %>">
                 <ul>
-                  <% msg.each do |message| %>
-                    <%= content_tag :li, message %>
-                  <% end %>
+                  <% msg.each do |message| -%>
+                    <li><%= message %></li>
+                  <% end -%>
                 </ul>
-              <% end %>
-
-            <% else %>
-              <%= content_tag :div, msg, class: name %>
-            <% end %>
-
-          <% end %>
+              </div>
+            <% else -%>
+              <%= content_tag :div, msg, class: "alert #{flash_class name}" %>
+            <% end -%>
+          <% end -%>
           <!-- END flash messages -->
 
 
