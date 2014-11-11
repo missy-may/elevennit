@@ -6,16 +6,16 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.post_type = params[:post_type] if params[:post_type].present?
   end
 
   def create
-    @post = Post.new(params.require(:post).permit(:title, :link, :body))
+    @post = Post.new(params.require(:post).permit(:title, :link, :body, :post_type))
     if @post.save
-      redirect_to posts_path, flash: { notice: 'It Worked.' }
+      redirect_to posts_path, flash: { notice: 'It worked' }
     else
-      flash.now[:error] = 'Whoops! Something went wrong. Please try again.'
+      flash.now[:error] = @post.errors.full_messages
       render :new
-      # redirect_to new_post_path, flash: { error: 'Whoops! Something went wrong. Please try again.' }
     end
   end
 
