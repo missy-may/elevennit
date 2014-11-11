@@ -1,8 +1,12 @@
 <%= form_for @post do |f| %>
-  <fieldset>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </fieldset>
+
+  <!-- Do not allow the title to be edited -->
+  <% if f.object.new_record? %>
+    <fieldset>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </fieldset>
+  <% end %>
 
   <fieldset>
     <% if f.object.link? %>
