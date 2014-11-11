@@ -1,12 +1,15 @@
 <%= form_for @post do |f| %>
-  <%= f.label :title %>:
-  <%= f.text_field :title %><br />
+	<fieldset>
+		<%= f.label :title %>:
+  	<%= f.text_field :title %>
+	</fieldset>
+  
 
   <%= f.label :link %>:
-  <%= f.text_field :link %><br />
+  <%= f.text_field :link %><br /><!-- 
 
   <%= f.label :body %>:
-  <%= f.text_area :body %><br />
+  <%= f.text_area :body %><br /> -->
 
   <%= f.submit %>
 <% end %>
