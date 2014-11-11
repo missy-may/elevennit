@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 <head>
   <title>Elevennit</title>
@@ -10,27 +10,45 @@
 
 <div class="container wrap">
   <div class="row">
-
-   <div class="col-xs-12">
-      <header><%= link_to 'Elevennit', posts_path %></header>
-  </div>
+    <div class="col-xs-12">
+      <header>
+        <%= link_to "Elevennit", root_path %>
+      </header>
+    </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-xs-8">
         <main>
+
+          <!-- BEGIN flash messages -->
           <% flash.each do |name, msg| %>
-            <%= content_tag :div, msg, class: name %>
-            <!-- BEGIN main content -->
+            <% if msg.is_a? Array %>
+
+              <%= content_tag :div, class: name do %>
+                <ul>
+                  <% msg.each do |message| %>
+                    <%= content_tag :li, message %>
+                  <% end %>
+                </ul>
+              <% end %>
+
+            <% else %>
+              <%= content_tag :div, msg, class: name %>
+            <% end %>
+
           <% end %>
-            <%= yield %>
-            <!-- END main content -->
+          <!-- END flash messages -->
+
+
+          <!-- BEGIN main content -->
+          <%= yield %>
+          <!-- END main content -->
         </main>
       </div>
       <div class="col-xs-4">
         <nav id="sidebar">
-            <%= link_to 'Submit a new link', new_post_path %>
-          
+          <%= link_to 'Submit a new link', new_post_path %>
         </nav>
       </div>
     </div>
@@ -38,10 +56,8 @@
   <div class="push"></div>
 </div>
 
-  <footer>
-    Use of this site constitutes acceptance of the <a 47 href="http://dresdenfiles.wikia.com/wiki/Unseelie_Accords">Unseelie Accords</a>.
-  </footer>
+<footer>
+  Use of this site constitutes acceptance of the <a href="http://dresdenfiles.wikia.com/wiki/Unseelie_Accords">Unseelie Accords</a>.
+</footer>
 </body>
 </html>
-Status API Training Shop Blog About
-© 2014 GitHub, Inc. Terms Privacy Security Contact
