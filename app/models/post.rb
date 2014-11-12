@@ -6,4 +6,5 @@ class Post < ActiveRecord::Base
   enum post_type: [:link, :text]
   validates :category_id, presence: true
   belongs_to :category
+  default_scope { order('updated_at DESC').includes(:category) }
 end

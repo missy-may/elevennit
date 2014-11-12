@@ -1,91 +1,91 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Elevennit</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Elevennit</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<div class="container wrap">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="col-xs-12">
-        <nav id="categories">
-          <div class="dropdown">
-            <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Categories
-             <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <% categories.find_each do |c| -%>
-                <li role="presentation"><%= link_to c.name, category_path(c), role: 'menuitem', tabindex: '-1' %></li>
+    <div class="container wrap">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="col-xs-12">
+            <nav id="categories">
+              <div class="dropdown">
+                <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Categories
+                 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                  <% categories.find_each do |c| -%>
+                    <li role="presentation"><%= link_to c.name, category_path(c), role: 'menuitem', tabindex: '-1' %></li>
+                  <% end -%>
+                </ul>
+              </div>
+              <span class="separator">|</span>
+              <ul class="category-links">
+              <% categories.each_with_index do |c, i| -%>
+                <li>
+                  <% if i > 0 -%>
+                    <span class="separator">-</span>
+                  <% end -%>
+                  <%= link_to c.name, category_path(c) %>
+                </li>
               <% end -%>
             </ul>
+            </nav>
+            <header><%= link_to 'Elevennit', posts_path %></header>
           </div>
-          <span class="separator">|</span>
-          <ul class="category-links">
-          <% categories.each_with_index do |c, i| -%>
-            <li>
-              <% if i > 0 -%>
-                <span class="separator">-</span>
-              <% end -%>
-              <%= link_to c.name, category_path(c) %>
-            </li>
-          <% end -%>
-        </ul>
-        </nav>
-        <header><%= link_to 'Elevennit', posts_path %></header>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-8">
-        <main>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-8">
+            <main>
 
-          <!-- BEGIN flash messages -->
-          <% flash.each do |name, msg| %>
-            <% if msg.is_a? Array %>
+              <!-- BEGIN flash messages -->
+              <% flash.each do |name, msg| %>
+                <% if msg.is_a? Array %>
 
-              <%= content_tag :div, class: "alert #{flash_class name}" do %>
-                <ul>
-                  <% msg.each do |message| %>
-                    <%= content_tag :li, message %>
+                  <%= content_tag :div, class: "alert #{flash_class name}" do %>
+                    <ul>
+                      <% msg.each do |message| %>
+                        <%= content_tag :li, message %>
+                      <% end %>
+                    </ul>
                   <% end %>
-                </ul>
+
+                <% else %>
+                  <%= content_tag :div, msg, class: "alert #{flash_class name}" %>
+                <% end %>
+
               <% end %>
-
-            <% else %>
-              <%= content_tag :div, msg, class: "alert #{flash_class name}" %>
-            <% end %>
-
-          <% end %>
-          <!-- END flash messages -->
+              <!-- END flash messages -->
 
 
-          <!-- BEGIN main content -->
-          <%= yield %>
-          <!-- END main content -->
-        </main>
+              <!-- BEGIN main content -->
+              <%= yield %>
+              <!-- END main content -->
+            </main>
+          </div>
+          <div class="col-xs-4">
+            <nav id="sidebar">
+              <%= link_to 'Submit a new link', new_post_path %>
+              <%= link_to 'Submit a text post', new_post_path(post_type: :text) %>
+              <%= link_to 'Create a new category', new_category_path %>
+              <div><%= yield :sidebar %></div>
+
+            </nav>
+          </div>
+        </div>
       </div>
-      <div class="col-xs-4">
-        <nav id="sidebar">
-          <%= link_to 'Submit a new link', new_post_path %>
-          <%= link_to 'Submit a text post', new_post_path(post_type: :text) %>
-          <%= link_to 'Create a new category', new_category_path %>
-          <div><%= yield :sidebar %></div>
-
-        </nav>
-      </div>
+      <div class="push"></div>
     </div>
-  </div>
-  <div class="push"></div>
-</div>
 
-<footer>
-  Use of this site constitutes acceptance of the <a href="http://dresdenfiles.wikia.com/wiki/Unseelie_Accords">Unseelie Accords</a>.
-</footer>
-</body>
+    <footer>
+      Use of this site constitutes acceptance of the <a href="http://dresdenfiles.wikia.com/wiki/Unseelie_Accords">Unseelie Accords</a>.
+    </footer>
+  </body>
 </html>
