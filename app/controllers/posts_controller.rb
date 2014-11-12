@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = Post.all
+    @posts = Post.with_categories.page(params[:page])
   end
 
   def show
