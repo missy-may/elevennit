@@ -1,6 +1,11 @@
 source 'https://rubygems.org'
 ruby '2.1.2'
 
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end
+
 gem 'bootstrap-sass'
 gem 'rails_12factor', group: :production
 gem 'pry-rails', group: [:development, :test]
