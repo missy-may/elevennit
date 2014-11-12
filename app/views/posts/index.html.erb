@@ -1,8 +1,1 @@
-<ul class="posts">
-<% @posts.each do |post| %>
-  <li>
-  	<%= render 'display', post: post %>
-    <%= render 'actions', post: post %>
-  </li>
-<% end %>
-</ul>
+<%= render 'list', posts: @posts %>

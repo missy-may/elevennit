@@ -2,6 +2,7 @@
 <% @categories.each do |category| %>
   <li>
   	<%= category.title %>
+  	<%= render 'posts/post_by_category', category: category %>
   </li>
 <% end %>
 </ul>
