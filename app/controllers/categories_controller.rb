@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @categories = Category.all
+    @category = Category.includes(:posts).find params[:id]
   end
 
   private
