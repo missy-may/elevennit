@@ -1,6 +1,6 @@
 <%= form_for comment, html: { class: 'comment' } do |f| %>
   <fieldset>
-    <%= f.label :body, 'Add a comment' %><br />
+    <%= f.label :body, 'Add a comment' %><br>
     <%= f.text_area :body %>
   </fieldset>
   <%= f.hidden_field :commentable_type %>
