@@ -2,6 +2,8 @@ class CommentsController < ApplicationController
   def create
     post = Post.find params[:comment][:commentable_id]
     comment = Comment.build_from post, current_user.id, comment_params[:body]
+    comment.parent_id = params[:comment][:parent_id]
+
     if comment.save
       flash[:notice] = 'Your comment has been added.'
     else
@@ -16,3 +18,5 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:body, :commentable_name, :commentable_id, :commentable_type)
   end
 end
+
+
