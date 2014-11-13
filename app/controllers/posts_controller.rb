@@ -3,9 +3,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :new, :update, :create, :destroy]
 
   def index
-    @posts = Post.with_categories.page(params[:page])
+    @posts = Post.with_categories.includes(:comment_threads).page(params[:page])
   end
-
   def show
     @post = Post.find params[:id]
     @comment = Comment.build_from(@post, current_user.id, '')
