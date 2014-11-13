@@ -7,6 +7,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find params[:id]
+    @comment = Comment.build_from(@post, current_user.id, '')
   end
 
   def edit
@@ -35,9 +37,9 @@ class PostsController < ApplicationController
   end
 
    def create
-    post = Post.new post_params
-    post.user_id = current_user.id
-    if post.save
+    @post = Post.new post_params
+    @post.user_id = current_user.id
+    if @post.save
       redirect_to posts_path, flash: { notice: 'New Post Created!' }
     else
       flash.now[:error] = @post.errors.full_messages
