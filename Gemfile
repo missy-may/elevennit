@@ -5,7 +5,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
-
+gem 'acts_as_commentable_with_threading'
 gem 'bootstrap-sass'
 gem 'rails_12factor', group: :production
 gem 'pry-rails', group: [:development, :test]

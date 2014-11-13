@@ -37,7 +37,7 @@ class PostsController < ApplicationController
    def create
     post = Post.new post_params
     post.user_id = current_user.id
-    if @post.save
+    if post.save
       redirect_to posts_path, flash: { notice: 'New Post Created!' }
     else
       flash.now[:error] = @post.errors.full_messages
